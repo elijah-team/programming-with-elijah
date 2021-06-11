@@ -1,0 +1,45 @@
+on: push
+name: Build and deploy on push
+jobs:
+  build:
+    name: shalzz/zola-deploy-action
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: shalzz/zola-deploy-action
+      uses: shalzz/zola-deploy-action@master
+      env:
+        PAGES_BRANCH: gh-pages
+        BUILD_DIR: blog
+        BUILD_FLAGS: --drafts
+        TOKEN: ${{ secrets.TOKEN }}
+
+    - name: 'Delete done'
+      run: sudo rm -rf blog
+       
+    - uses: actions/checkout@v1
+      with:
+        ref: gh-pages
+
+#    - name: 'Download Ripgrep'
+#      run: |
+#        curl -sL https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep-12.1.1-x86_64-unknown-linux-musl.tar.gz  | tar zxv
+#        mv ripgrep-12.1.1-x86_64-unknown-linux-musl/rg .
+
+    - name: 'Download fart-it'
+      run: | 
+        curl -sL https://github.com/tripleo1/fart-it/releases/download/2021-May-29/fart > fart
+        chmod +x ./fart
+
+    - name: 'Search and Replace'
+      run: |
+        ./fart -r \*.html href=\"/ href=\"/programming-with-elijah/
+        ./fart -r \*.html src=\"/ src=\"/programming-with-elijah/
+
+    - run: |
+        date > generated.txt
+        git config user.name search-and-replace
+        git config user.email github-actions@search-and-replace.com
+        git add .
+        git commit -m "Search and replaced ${GITHUB_SHA}"
+        git push
