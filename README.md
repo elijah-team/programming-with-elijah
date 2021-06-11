@@ -10,7 +10,7 @@ The code for each post lives in a separate git branch. This makes it possible to
 
 **The code for the latest post is available [here][latest-post].**
 
-[latest-post]: https://tripleo1.github.io/blog/tree/post-12
+[latest-post]: https://elijah-team.github.io/programming-with-elijah/tree/post-12
 
 You can find the branch for each post by following the `(source code)` link in the [post list](#posts) below. The branches are named `post-XX` where `XX` is the post number, for example `post-03` for the _VGA Text Mode_ post or `post-07` for the _Hardware Interrupts_ post. For build instructions, see the Readme of the respective branch.
 
@@ -30,44 +30,44 @@ The goal of this project is to provide step-by-step tutorials in individual blog
 
 **Organizing your Code:**
 
-- [A Freestanding Rust Binary](https://tripleo1.github.io/blog/freestanding-rust-binary/)
-    ([source code](https://tripleo1.github.io/blog/tree/post-01))
-- [A Minimal Rust Kernel](https://tripleo1.github.io/blog/minimal-rust-kernel/)
-    ([source code](https://tripleo1.github.io/blog/tree/post-02))
-- [VGA Text Mode](https://tripleo1.github.io/blog/vga-text-mode/)
-    ([source code](https://tripleo1.github.io/blog/tree/post-03))
-- [Testing](https://tripleo1.github.io/blog/testing/)
-    ([source code](https://tripleo1.github.io/blog/tree/post-04))
+- [A Freestanding Rust Binary](https://elijah-team.github.io/programming-with-elijah/freestanding-rust-binary/)
+    ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-01))
+- [A Minimal Rust Kernel](https://elijah-team.github.io/programming-with-elijah/minimal-rust-kernel/)
+    ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-02))
+- [VGA Text Mode](https://elijah-team.github.io/programming-with-elijah/vga-text-mode/)
+    ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-03))
+- [Testing](https://elijah-team.github.io/programming-with-elijah/testing/)
+    ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-04))
 
 **Function Invocation:**
 
-- [CPU Exceptions](https://tripleo1.github.io/blog/cpu-exceptions/)
-    ([source code](https://tripleo1.github.io/blog/tree/post-05))
-- [Double Faults](https://tripleo1.github.io/blog/double-fault-exceptions/)
-    ([source code](https://tripleo1.github.io/blog/tree/post-06))
-- [Hardware Interrupts](https://tripleo1.github.io/blog/hardware-interrupts/)
-    ([source code](https://tripleo1.github.io/blog/tree/post-07))
+- [CPU Exceptions](https://elijah-team.github.io/programming-with-elijah/cpu-exceptions/)
+    ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-05))
+- [Double Faults](https://elijah-team.github.io/programming-with-elijah/double-fault-exceptions/)
+    ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-06))
+- [Hardware Interrupts](https://elijah-team.github.io/programming-with-elijah/hardware-interrupts/)
+    ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-07))
 
 **The Memory Model:**
 
-- [Introduction to Paging](https://tripleo1.github.io/blog/paging-introduction/)
-    ([source code](https://tripleo1.github.io/blog/tree/post-08))
-- [Paging Implementation](https://tripleo1.github.io/blog/paging-implementation/)
-    ([source code](https://tripleo1.github.io/blog/tree/post-09))
-- [Heap Allocation](https://tripleo1.github.io/blog/heap-allocation/)
-    ([source code](https://tripleo1.github.io/blog/tree/post-10))
-- [Allocator Designs](https://tripleo1.github.io/blog/allocator-designs/)
-    ([source code](https://tripleo1.github.io/blog/tree/post-11))
+- [Introduction to Paging](https://elijah-team.github.io/programming-with-elijah/paging-introduction/)
+    ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-08))
+- [Paging Implementation](https://elijah-team.github.io/programming-with-elijah/paging-implementation/)
+    ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-09))
+- [Heap Allocation](https://elijah-team.github.io/programming-with-elijah/heap-allocation/)
+    ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-10))
+- [Allocator Designs](https://elijah-team.github.io/programming-with-elijah/allocator-designs/)
+    ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-11))
 
 **Concurrency**:
 
-- [Async/Await](https://tripleo1.github.io/blog/async-await/)
-    ([source code](https://tripleo1.github.io/blog/tree/post-12))
+- [Async/Await](https://elijah-team.github.io/programming-with-elijah/async-await/)
+    ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-12))
 
 **Portablility and Code Generation**:
 
-- [Async/Await](https://tripleo1.github.io/blog/async-await/)
-    ([source code](https://tripleo1.github.io/blog/tree/post-12))
+- [Async/Await](https://elijah-team.github.io/programming-with-elijah/async-await/)
+    ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-12))
 
 ## First Edition Posts
 
@@ -75,47 +75,47 @@ The current version of the blog is already the second edition. The first edition
 
 <details><summary><i>Click to expand</i></summary>
 
-**Bare Bones:**
+**Organizing your Code:**
 
-- [A Minimal x86 Kernel](https://tripleo1.github.io/blog/multiboot-kernel.html)
-      ([source code](https://tripleo1.github.io/blog/tree/first_edition_post_1))
-- [Entering Long Mode](https://tripleo1.github.io/blog/entering-longmode.html)
-      ([source code](https://tripleo1.github.io/blog/tree/first_edition_post_2))
-- [Set Up Rust](https://tripleo1.github.io/blog/set-up-rust.html)
-      ([source code](https://tripleo1.github.io/blog/tree/first_edition_post_3))
-- [Printing to Screen](https://tripleo1.github.io/blog/printing-to-screen.html)
-      ([source code](https://tripleo1.github.io/blog/tree/first_edition_post_4))
+- [A Minimal x86 Kernel](https://elijah-team.github.io/programming-with-elijah/multiboot-kernel.html)
+      ([source code](https://elijah-team.github.io/programming-with-elijah/tree/first_edition_post_1))
+- [Entering Long Mode](https://elijah-team.github.io/programming-with-elijah/entering-longmode.html)
+      ([source code](https://elijah-team.github.io/programming-with-elijah/tree/first_edition_post_2))
+- [Set Up Rust](https://elijah-team.github.io/programming-with-elijah/set-up-rust.html)
+      ([source code](https://elijah-team.github.io/programming-with-elijah/tree/first_edition_post_3))
+- [Printing to Screen](https://elijah-team.github.io/programming-with-elijah/printing-to-screen.html)
+      ([source code](https://elijah-team.github.io/programming-with-elijah/tree/first_edition_post_4))
 
 **Memory Management:**
 
-- [Allocating Frames](https://tripleo1.github.io/blog/allocating-frames.html)
-      ([source code](https://tripleo1.github.io/blog/tree/first_edition_post_5))
-- [Page Tables](https://tripleo1.github.io/blog/modifying-page-tables.html)
-      ([source code](https://tripleo1.github.io/blog/tree/first_edition_post_6))
-- [Remap the Kernel](https://tripleo1.github.io/blog/remap-the-kernel.html)
-      ([source code](https://tripleo1.github.io/blog/tree/first_edition_post_7))
-- [Kernel Heap](https://tripleo1.github.io/blog/kernel-heap.html)
-      ([source code](https://tripleo1.github.io/blog/tree/first_edition_post_8))
+- [Allocating Frames](https://elijah-team.github.io/programming-with-elijah/allocating-frames.html)
+      ([source code](https://elijah-team.github.io/programming-with-elijah/tree/first_edition_post_5))
+- [Page Tables](https://elijah-team.github.io/programming-with-elijah/modifying-page-tables.html)
+      ([source code](https://elijah-team.github.io/programming-with-elijah/tree/first_edition_post_6))
+- [Remap the Kernel](https://elijah-team.github.io/programming-with-elijah/remap-the-kernel.html)
+      ([source code](https://elijah-team.github.io/programming-with-elijah/tree/first_edition_post_7))
+- [Kernel Heap](https://elijah-team.github.io/programming-with-elijah/kernel-heap.html)
+      ([source code](https://elijah-team.github.io/programming-with-elijah/tree/first_edition_post_8))
 
 **Exceptions:**
 
-- [Handling Exceptions](https://tripleo1.github.io/blog/handling-exceptions.html)
-      ([source code](https://tripleo1.github.io/blog/tree/first_edition_post_9))
-- [Double Faults](https://tripleo1.github.io/blog/double-faults.html)
-      ([source code](https://tripleo1.github.io/blog/tree/first_edition_post_10))
+- [Handling Exceptions](https://elijah-team.github.io/programming-with-elijah/handling-exceptions.html)
+      ([source code](https://elijah-team.github.io/programming-with-elijah/tree/first_edition_post_9))
+- [Double Faults](https://elijah-team.github.io/programming-with-elijah/double-faults.html)
+      ([source code](https://elijah-team.github.io/programming-with-elijah/tree/first_edition_post_10))
 
 **Additional Resources:**
 
-- [Cross Compile Binutils](https://tripleo1.github.io/blog/cross-compile-binutils.html)
-- [Cross Compile libcore](https://tripleo1.github.io/blog/cross-compile-libcore.html)
-- [Set Up GDB](https://tripleo1.github.io/blog/set-up-gdb)
-- [Handling Exceptions using Naked Functions](https://tripleo1.github.io/blog/handling-exceptions-with-naked-fns.html)
-    - [Catching Exceptions](https://tripleo1.github.io/blog/catching-exceptions.html)
-          ([source code](https://tripleo1.github.io/blog/tree/catching_exceptions))
-    - [Better Exception Messages](https://tripleo1.github.io/blog/better-exception-messages.html)
-          ([source code](https://tripleo1.github.io/blog/tree/better_exception_messages))
-    - [Returning from Exceptions](https://tripleo1.github.io/blog/returning-from-exceptions.html)
-          ([source code](https://tripleo1.github.io/blog/tree/returning_from_exceptions))
+- [Cross Compile Binutils](https://elijah-team.github.io/programming-with-elijah/cross-compile-binutils.html)
+- [Cross Compile libcore](https://elijah-team.github.io/programming-with-elijah/cross-compile-libcore.html)
+- [Set Up GDB](https://elijah-team.github.io/programming-with-elijah/set-up-gdb)
+- [Handling Exceptions using Naked Functions](https://elijah-team.github.io/programming-with-elijah/handling-exceptions-with-naked-fns.html)
+    - [Catching Exceptions](https://elijah-team.github.io/programming-with-elijah/catching-exceptions.html)
+          ([source code](https://elijah-team.github.io/programming-with-elijah/tree/catching_exceptions))
+    - [Better Exception Messages](https://elijah-team.github.io/programming-with-elijah/better-exception-messages.html)
+          ([source code](https://elijah-team.github.io/programming-with-elijah/tree/better_exception_messages))
+    - [Returning from Exceptions](https://elijah-team.github.io/programming-with-elijah/returning-from-exceptions.html)
+          ([source code](https://elijah-team.github.io/programming-with-elijah/tree/returning_from_exceptions))
 
 </details>
 

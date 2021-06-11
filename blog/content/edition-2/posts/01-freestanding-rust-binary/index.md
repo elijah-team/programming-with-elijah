@@ -5,7 +5,7 @@ path = "freestanding-rust-binary"
 date = 2018-02-10
 
 [extra]
-chapter = "Bare Bones"
+chapter = "Organizing your Code"
 +++
 
 The first step in creating our own operating system kernel is to create a Rust executable that does not link the standard library. This makes it possible to run Rust code on the [bare metal] without an underlying operating system.
@@ -18,7 +18,7 @@ This blog is openly developed on [GitHub]. If you have any problems or questions
 
 [GitHub]: https://tripleo1.github.io/blog
 [at the bottom]: #comments
-[post branch]: https://tripleo1.github.io/blog/tree/post-01
+[post branch]: https://elijah-team.github.io/programming-with-elijah/tree/post-01
 
 <!-- toc -->
 

@@ -5,7 +5,7 @@ path = "testing"
 date = 2019-04-27
 
 [extra]
-chapter = "Bare Bones"
+chapter = "Organizing your Code"
 +++
 
 This post explores unit and integration testing in `no_std` executables. We will use Rust's support for custom test frameworks to execute test functions inside our kernel. To report the results out of QEMU, we will use different features of QEMU and the `bootimage` tool.
@@ -16,7 +16,7 @@ This blog is openly developed on [GitHub]. If you have any problems or questions
 
 [GitHub]: https://tripleo1.github.io/blog
 [at the bottom]: #comments
-[post branch]: https://tripleo1.github.io/blog/tree/post-04
+[post branch]: https://elijah-team.github.io/programming-with-elijah/tree/post-04
 
 <!-- toc -->
 

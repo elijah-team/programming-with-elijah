@@ -5,7 +5,7 @@ path = "paging-introduction"
 date = 2019-01-14
 
 [extra]
-chapter = "Memory Management"
+chapter = "The Memory Model"
 +++
 
 This post introduces _paging_, a very common memory management scheme that we will also use for our operating system. It explains why memory isolation is needed, how _segmentation_ works, what _virtual memory_ is, and how paging solves memory fragmentation issues. It also explores the layout of multilevel page tables on the x86_64 architecture.
@@ -16,7 +16,7 @@ This blog is openly developed on [GitHub]. If you have any problems or questions
 
 [GitHub]: https://tripleo1.github.io/blog
 [at the bottom]: #comments
-[post branch]: https://tripleo1.github.io/blog/tree/post-08
+[post branch]: https://elijah-team.github.io/programming-with-elijah/tree/post-08
 
 <!-- toc -->
 

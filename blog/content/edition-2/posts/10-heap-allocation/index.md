@@ -5,7 +5,7 @@ path = "heap-allocation"
 date = 2019-06-26
 
 [extra]
-chapter = "Memory Management"
+chapter = "The Memory Model"
 +++
 
 This post adds support for heap allocation to our kernel. First, it gives an introduction to dynamic memory and shows how the borrow checker prevents common allocation errors. It then implements the basic allocation interface of Rust, creates a heap memory region, and sets up an allocator crate. At the end of this post all the allocation and collection types of the built-in `alloc` crate will be available to our kernel.
@@ -16,7 +16,7 @@ This blog is openly developed on [GitHub]. If you have any problems or questions
 
 [GitHub]: https://tripleo1.github.io/blog
 [at the bottom]: #comments
-[post branch]: https://tripleo1.github.io/blog/tree/post-10
+[post branch]: https://elijah-team.github.io/programming-with-elijah/tree/post-10
 
 <!-- toc -->
 

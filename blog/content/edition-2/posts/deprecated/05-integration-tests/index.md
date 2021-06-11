@@ -17,7 +17,7 @@ This blog is openly developed on [GitHub]. If you have any problems or questions
 
 [GitHub]: https://tripleo1.github.io/blog
 [at the bottom]: #comments
-[post branch]: https://tripleo1.github.io/blog/tree/post-05
+[post branch]: https://elijah-team.github.io/programming-with-elijah/tree/post-05
 
 <!-- toc -->
 

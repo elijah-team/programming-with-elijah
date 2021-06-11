@@ -5,7 +5,7 @@ path = "paging-implementation"
 date = 2019-03-14
 
 [extra]
-chapter = "Memory Management"
+chapter = "The Memory Model"
 +++
 
 This post shows how to implement paging support in our kernel. It first explores different techniques to make the physical page table frames accessible to the kernel and discusses their respective advantages and drawbacks. It then implements an address translation function and a function to create a new mapping.
@@ -16,7 +16,7 @@ This blog is openly developed on [GitHub]. If you have any problems or questions
 
 [GitHub]: https://tripleo1.github.io/blog
 [at the bottom]: #comments
-[post branch]: https://tripleo1.github.io/blog/tree/post-09
+[post branch]: https://elijah-team.github.io/programming-with-elijah/tree/post-09
 
 <!-- toc -->
 
@@ -260,7 +260,7 @@ However, it also has some disadvantages:
 - It only allows accessing the currently active address space easily. Accessing other address spaces is still possible by changing the recursive entry, but a temporary mapping is required for switching back. We described how to do this in the (outdated) [_Remap The Kernel_] post.
 - It heavily relies on the page table format of x86 and might not work on other architectures.
 
-[_Remap The Kernel_]: https://tripleo1.github.io/blog/remap-the-kernel/#overview
+[_Remap The Kernel_]: https://elijah-team.github.io/programming-with-elijah/remap-the-kernel/#overview
 
 ## Bootloader Support
 

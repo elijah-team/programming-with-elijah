@@ -5,7 +5,7 @@ path = "double-fault-exceptions"
 date  = 2018-06-18
 
 [extra]
-chapter = "Interrupts"
+chapter = "Function Invocation"
 +++
 
 This post explores the double fault exception in detail, which occurs when the CPU fails to invoke an exception handler. By handling this exception we avoid fatal _triple faults_ that cause a system reset. To prevent triple faults in all cases we also set up an _Interrupt Stack Table_ to catch double faults on a separate kernel stack.
@@ -16,7 +16,7 @@ This blog is openly developed on [GitHub]. If you have any problems or questions
 
 [GitHub]: https://tripleo1.github.io/blog
 [at the bottom]: #comments
-[post branch]: https://tripleo1.github.io/blog/tree/post-06
+[post branch]: https://elijah-team.github.io/programming-with-elijah/tree/post-06
 
 <!-- toc -->
 

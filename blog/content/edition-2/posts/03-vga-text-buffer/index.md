@@ -5,7 +5,7 @@ path = "vga-text-mode"
 date  = 2018-02-26
 
 [extra]
-chapter = "Bare Bones"
+chapter = "Organizing your Code"
 +++
 
 The [VGA text mode] is a simple way to print text to the screen. In this post, we create an interface that makes its usage safe and simple, by encapsulating all unsafety in a separate module. We also implement support for Rust's [formatting macros].
@@ -19,7 +19,7 @@ This blog is openly developed on [GitHub]. If you have any problems or questions
 
 [GitHub]: https://tripleo1.github.io/blog
 [at the bottom]: #comments
-[post branch]: https://tripleo1.github.io/blog/tree/post-03
+[post branch]: https://elijah-team.github.io/programming-with-elijah/tree/post-03
 
 <!-- toc -->
 

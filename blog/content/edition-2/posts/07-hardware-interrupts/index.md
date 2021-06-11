@@ -5,7 +5,7 @@ path = "hardware-interrupts"
 date = 2018-10-22
 
 [extra]
-chapter = "Interrupts"
+chapter = "Function Invocation"
 +++
 
 In this post we set up the programmable interrupt controller to correctly forward hardware interrupts to the CPU. To handle these interrupts we add new entries to our interrupt descriptor table, just like we did for our exception handlers. We will learn how to get periodic timer interrupts and how to get input from the keyboard.
@@ -16,7 +16,7 @@ This blog is openly developed on [GitHub]. If you have any problems or questions
 
 [GitHub]: https://tripleo1.github.io/blog
 [at the bottom]: #comments
-[post branch]: https://tripleo1.github.io/blog/tree/post-07
+[post branch]: https://elijah-team.github.io/programming-with-elijah/tree/post-07
 
 <!-- toc -->
 
