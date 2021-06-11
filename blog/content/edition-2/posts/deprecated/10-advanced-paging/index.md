@@ -15,7 +15,7 @@ This post explains techniques to make the physical page table frames accessible 
 
 This blog is openly developed on [GitHub]. If you have any problems or questions, please open an issue there. You can also leave comments [at the bottom]. The complete source code for this post can be found [here][post branch].
 
-[GitHub]: https://tripleo1.github.io/blog
+[GitHub]: https://github.com/elijah-team/programming-with-elijah/
 [at the bottom]: #comments
 [post branch]: https://elijah-team.github.io/programming-with-elijah/tree/5c0fb63f33380fc8596d7166c2ebde03ef3d6726
 

@@ -16,7 +16,7 @@ CPU exceptions occur in various erroneous situations, for example when accessing
 
 This blog is openly developed on [GitHub]. If you have any problems or questions, please open an issue there. You can also leave comments [at the bottom]. The complete source code for this post can be found in the [`post-05`][post branch] branch.
 
-[GitHub]: https://tripleo1.github.io/blog
+[GitHub]: https://github.com/elijah-team/programming-with-elijah/
 [at the bottom]: #comments
 [post branch]: https://elijah-team.github.io/programming-with-elijah/tree/post-05
 

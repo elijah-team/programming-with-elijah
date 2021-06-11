@@ -14,7 +14,7 @@ This post explores the double fault exception in detail, which occurs when the C
 
 This blog is openly developed on [GitHub]. If you have any problems or questions, please open an issue there. You can also leave comments [at the bottom].  The complete source code for this post can be found in the [`post-06`][post branch] branch.
 
-[GitHub]: https://tripleo1.github.io/blog
+[GitHub]: https://github.com/elijah-team/programming-with-elijah/
 [at the bottom]: #comments
 [post branch]: https://elijah-team.github.io/programming-with-elijah/tree/post-06
 
