@@ -1,5 +1,5 @@
 title = "Programming in Elijah"
-base_url = "https://elijah-team.github.io/programming-in-elijah/"
+base_url = "https://elijah-team.github.io/programming-with-elijah/"
 description = "This blog shows how to program in Elijah. Each post is a small tutorial and includes all needed code."
 
 highlight_code = true
