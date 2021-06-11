@@ -74,20 +74,24 @@ main img {
   background-color: #99ff0022;
 }
 
-.posts.bare-bones {
+.posts.organizing-your-code {
   border: 2px solid #66f;
 }
 
-.posts.memory-management {
+.posts.the-memory-model {
   border: 2px solid #fc0
 }
 
-.posts.interrupts {
+.posts.function-invocation {
   border: 2px solid #f66;
 }
 
-.posts.multitasking {
+.posts.concurrency {
   border: 2px solid #556b2f;
+}
+
+.posts.portablility-and-code-generation {
+  border: 2px solid #99892f;
 }
 
 .posts hr {
