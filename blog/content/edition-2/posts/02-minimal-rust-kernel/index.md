@@ -1,16 +1,14 @@
 +++
-title = "A Minimal Rust Kernel"
+title = "Namespaces and Packages"
 weight = 2
-path = "minimal-rust-kernel"
-date = 2018-02-10
+path = "namespaces-and-packages"
+date = 2021-06-13
 
 [extra]
 chapter = "Organizing your Code"
 +++
 
-In this post we create a minimal 64-bit Rust kernel for the x86 architecture. We build upon the [freestanding Rust binary] from the previous post to create a bootable disk image, that prints something to the screen.
-
-[freestanding Rust binary]: @/edition-2/posts/01-freestanding-rust-binary/index.md
+Namespaces and packages are essential to keep your code orderly and to use code written by other people.
 
 <!-- more -->
 

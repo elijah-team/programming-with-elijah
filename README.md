@@ -30,16 +30,16 @@ The goal of this project is to provide step-by-step tutorials in individual blog
 
 **Organizing your Code:**
 
-- [A Freestanding Rust Binary](https://elijah-team.github.io/programming-with-elijah/freestanding-rust-binary/)
+- [Classes](https://elijah-team.github.io/programming-with-elijah/classes/)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-01))
-- [A Minimal Rust Kernel](https://elijah-team.github.io/programming-with-elijah/minimal-rust-kernel/)
+- [Namespaces and Packages](https://elijah-team.github.io/programming-with-elijah/namespaces-and-packages/)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-02))
-- [VGA Text Mode](https://elijah-team.github.io/programming-with-elijah/vga-text-mode/)
+- [Libraries and Executables](https://elijah-team.github.io/programming-with-elijah/libraries-and-executables/)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-03))
 - [Testing](https://elijah-team.github.io/programming-with-elijah/testing/)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-04))
 
-**Function Invocation:**
+**The Magic of Functions:**
 
 - [CPU Exceptions](https://elijah-team.github.io/programming-with-elijah/cpu-exceptions/)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-05))
@@ -66,7 +66,7 @@ The goal of this project is to provide step-by-step tutorials in individual blog
 
 **Portablility and Code Generation**:
 
-- [Async/Await](https://elijah-team.github.io/programming-with-elijah/async-await/)
+- [Portability and Code Generation](https://elijah-team.github.io/programming-with-elijah/portability-and-code-generation/)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-12))
 
 ## First Edition Posts

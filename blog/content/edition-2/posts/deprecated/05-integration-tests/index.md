@@ -103,10 +103,6 @@ lazy_static! {
 }
 ```
 
-Like with the [VGA text buffer][vga lazy-static], we use `lazy_static` and a spinlock to create a `static`. However, this time we use `lazy_static` to ensure that the `init` method is called before first use. We're using the port address `0x3F8`, which is the standard port number for the first serial interface.
-
-[vga lazy-static]: @/edition-2/posts/03-vga-text-buffer/index.md#lazy-statics
-
 To make the serial port easily usable, we add `serial_print!` and `serial_println!` macros:
 
 ```rust

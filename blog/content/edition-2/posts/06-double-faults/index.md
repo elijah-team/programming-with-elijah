@@ -5,7 +5,7 @@ path = "double-fault-exceptions"
 date  = 2018-06-18
 
 [extra]
-chapter = "Function Invocation"
+chapter = "The Magic of Functions"
 +++
 
 This post explores the double fault exception in detail, which occurs when the CPU fails to invoke an exception handler. By handling this exception we avoid fatal _triple faults_ that cause a system reset. To prevent triple faults in all cases we also set up an _Interrupt Stack Table_ to catch double faults on a separate kernel stack.
@@ -23,7 +23,7 @@ This blog is openly developed on [GitHub]. If you have any problems or questions
 ## What is a Double Fault?
 In simplified terms, a double fault is a special exception that occurs when the CPU fails to invoke an exception handler. For example, it occurs when a page fault is triggered but there is no page fault handler registered in the [Interrupt Descriptor Table][IDT] (IDT). So it's kind of similar to catch-all blocks in programming languages with exceptions, e.g. `catch(...)` in C++ or `catch(Exception e)` in Java or C#.
 
-[IDT]: @/edition-2/posts/05-cpu-exceptions/index.md#the-interrupt-descriptor-table
+[IDT]: @/edition-2/posts/05-cpu-exceptions/index.md
 
 A double fault behaves like a normal exception. It has the vector number `8` and we can define a normal handler function for it in the IDT. It is really important to provide a double fault handler, because if a double fault is unhandled a fatal _triple fault_ occurs. Triple faults can't be caught and most hardware reacts with a system reset.
 
@@ -157,7 +157,7 @@ A guard page is a special memory page at the bottom of a stack that makes it pos
 
 When a page fault occurs the CPU looks up the page fault handler in the IDT and tries to push the [interrupt stack frame] onto the stack. However, the current stack pointer still points to the non-present guard page. Thus, a second page fault occurs, which causes a double fault (according to the above table).
 
-[interrupt stack frame]: @/edition-2/posts/05-cpu-exceptions/index.md#the-interrupt-stack-frame
+[interrupt stack frame]: @/edition-2/posts/05-cpu-exceptions/index.md
 
 So the CPU tries to call the _double fault handler_ now. However, on a double fault the CPU tries to push the exception stack frame, too. The stack pointer still points to the guard page, so a _third_ page fault occurs, which causes a _triple fault_ and a system reboot. So our current double fault handler can't avoid a triple fault in this case.
 
@@ -200,7 +200,7 @@ struct InterruptStackTable {
 
 For each exception handler, we can choose a stack from the IST through the `stack_pointers` field in the corresponding [IDT entry]. For example, we could use the first stack in the IST for our double fault handler. Then the CPU would automatically switch to this stack whenever a double fault occurs. This switch would happen before anything is pushed, so it would prevent the triple fault.
 
-[IDT entry]: @/edition-2/posts/05-cpu-exceptions/index.md#the-interrupt-descriptor-table
+[IDT entry]: @/edition-2/posts/05-cpu-exceptions/index.md
 
 ### The IST and TSS
 The Interrupt Stack Table (IST) is part of an old legacy structure called _[Task State Segment]_ \(TSS). The TSS used to hold various information (e.g. processor register state) about a task in 32-bit mode and was for example used for [hardware context switching]. However, hardware context switching is no longer supported in 64-bit mode and the format of the TSS changed completely.
@@ -442,7 +442,7 @@ name = "stack_overflow"
 harness = false
 ```
 
-[without a test harness]: @/edition-2/posts/04-testing/index.md#no-harness-tests
+[without a test harness]: @/edition-2/posts/04-testing/index.md
 
 Now `cargo test --test stack_overflow` should compile successfully. The test fails of course, since the `unimplemented` macro panics.
 
