@@ -1,6 +1,6 @@
 # Blog OS
 
-This repository contains the source code for the _Programming in Elijah_ series at [tripleo1.github.io/blog](https://tripleo1.github.io/blog).
+This repository contains the source code for the _Programming with Elijah_ series at [elijah-team.github.io/programming-with-elijah/](https://elijah-team.github.io/programming-with-elijah/).
 
 If you have questions, open an issue or chat with us [on Gitter](https://gitter.im/nowhere/nowhere).
 
@@ -41,7 +41,7 @@ The goal of this project is to provide step-by-step tutorials in individual blog
 
 **The Magic of Functions:**
 
-- [CPU Exceptions](https://elijah-team.github.io/programming-with-elijah/cpu-exceptions/)
+- [Function Invocation](https://elijah-team.github.io/programming-with-elijah/function-invocation/)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-05))
 - [Double Faults](https://elijah-team.github.io/programming-with-elijah/double-fault-exceptions/)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-06))

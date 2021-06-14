@@ -1,4 +1,4 @@
-title = "Programming in Elijah"
+title = "Programming with Elijah"
 base_url = "https://elijah-team.github.io/programming-with-elijah/"
 description = "This blog shows how to program in Elijah. Each post is a small tutorial and includes all needed code."
 
@@ -30,7 +30,7 @@ skip_anchor_prefixes = [
 ]
 
 [extra]
-subtitle = "Tripleo's blog"
+subtitle = "Programming with Elijah"
 author = { name = "Tripleo" }
 
 [translations.en]
