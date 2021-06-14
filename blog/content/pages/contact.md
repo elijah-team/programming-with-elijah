@@ -6,6 +6,8 @@ template = "plain.html"
 
 Tripleo
 
-<big>contact@phil-opp.com</big>
+<big>remove-oluoluolu+programming-with-elijah@gmail.com</big>
 
-<small>Gerwigstraße 17, 76131 Karlsruhe, Germany</small>
+<big>Twitter: @tripleo_sw</big>
+
+<small>Somewhere in the USA</small>
