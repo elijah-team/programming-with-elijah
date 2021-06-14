@@ -6,8 +6,8 @@ template = "plain.html"
 
 Tripleo
 
-<big>remove-oluoluolu+programming-with-elijah@gmail.com</big>
+<big><a href="mailto:remove-oluoluolu+programming-with-elijah@gmail.com">remove-oluoluolu+programming-with-elijah@gmail.com</a></big>
 
-<big>Twitter: @tripleo_sw</big>
+<small><a href="https://twitter.com/tripleo_sw">Twitter: @tripleo_sw</a></small>
 
 <small>Somewhere in the USA</small>
