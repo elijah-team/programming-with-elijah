@@ -2,25 +2,28 @@
 title = "Memory Classes"
 weight = 8
 path = "memory-classes"
-date = 2021-06-13
+date = 2021-06-29
 
 [extra]
 chapter = "The Memory Model"
 +++
 
-## Memory Classes
-
-ref gc pooled manual
+Memory in Elijah is under complete control of the programmer. (This may not be so in some backends such as Java, where there is only a modicum of control allowed.)  Memory models, when applied to variables allow the specification of how and when memory is allocated and released by a program.
 
 <!-- more -->
 
-## Summary
+## Memory Classes
 
-This post introduced two memory protection techniques: segmentation and paging. While the former uses variable-sized memory regions and suffers from external fragmentation, the latter uses fixed-sized pages and allows much more fine-grained control over access permissions.
+* ref 
+* gc 
+* pooled 
+* manual
 
-Paging stores the mapping information for pages in page tables with one or more levels. The x86_64 architecture uses 4-level page tables and a page size of 4KiB. The hardware automatically walks the page tables and caches the resulting translations in the translation lookaside buffer (TLB). This buffer is not updated transparently and needs to be flushed manually on page table changes.
+## Allocators
 
-We learned that our kernel already runs on top of paging and that illegal memory accesses cause page fault exceptions. We tried to access the currently active page tables, but we weren't able to do it because the CR3 register stores a physical address that we can't access directly from our kernel.
+Each function has an implicit allocator (which is usually inherited from somewhere, like the next function up in the call stack).  It is this allocator that determines the memory profile of the function.
+
+That means you can have a separate arena for GCed objects or a Pool for efficient use of memory without touching `malloc`.
 
 ## What's next?
 
