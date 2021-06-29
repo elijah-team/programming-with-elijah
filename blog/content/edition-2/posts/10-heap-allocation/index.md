@@ -318,7 +318,7 @@ The error handler is called because the `Box::new` function implicitly calls the
 
 Before we can create a proper allocator, we first need to create a heap memory region from which the allocator can allocate memory. To do this, we need to define a virtual memory range for the heap region and then map this region to physical frames. See the [_"Introduction To Paging"_] post for an overview of virtual memory and page tables.
 
-[_"Introduction To Paging"_]: @/edition-2/posts/08-paging-introduction/index.md
+[_"Introduction To Paging"_]: @/edition-2/posts/08-memory-classes/index.md
 
 The first step is to define a virtual memory region for the heap. We can choose any virtual address range that we like, as long as it is not already used for a different memory region. Let's define it as the memory starting at address `0x_4444_4444_0000` so that we can easily recognize a heap pointer later:
 
@@ -403,7 +403,7 @@ The implementation can be broken down into two parts:
 [`Option::ok_or`]: https://doc.rust-lang.org/core/option/enum.Option.html#method.ok_or
 [question mark operator]: https://doc.rust-lang.org/edition-guide/rust-2018/error-handling-and-panics/the-question-mark-operator-for-easier-error-handling.html
 [`MapperFlush`]: https://docs.rs/x86_64/0.14.2/x86_64/structures/paging/mapper/struct.MapperFlush.html
-[_translation lookaside buffer_]: @/edition-2/posts/08-paging-introduction/index.md
+[_translation lookaside buffer_]: @/edition-2/posts/08-memory-classes/index.md
 [`flush`]: https://docs.rs/x86_64/0.14.2/x86_64/structures/paging/mapper/struct.MapperFlush.html#method.flush
 
 The final step is to call this function from our `kernel_main`:

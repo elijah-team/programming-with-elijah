@@ -24,7 +24,7 @@ This blog is openly developed on [GitHub]. If you have any problems or questions
 
 The [previous post] gave an introduction to the concept of paging. It motivated paging by comparing it with segmentation, explained how paging and page tables work, and then introduced the 4-level page table design of `x86_64`. We found out that the bootloader already set up a page table hierarchy for our kernel, which means that our kernel already runs on virtual addresses. This improves safety since illegal memory accesses cause page fault exceptions instead of modifying arbitrary physical memory.
 
-[previous post]: @/edition-2/posts/08-paging-introduction/index.md
+[previous post]: @/edition-2/posts/08-memory-classes/index.md
 
 ## Accessing Page Tables
 
