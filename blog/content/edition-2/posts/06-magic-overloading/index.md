@@ -56,6 +56,4 @@ Overloading constructors is basically the same as overloading functions.  You ca
 Named constructors cannot be overloaded.  That is only one per name per class is allowed.  Of course you can choose to inherit or redefine a named constructor from a base class.
 
 ## What's next?
-The next post explains how to handle interrupts from external devices such as timers, keyboards, or network controllers. These hardware interrupts are very similar to exceptions, e.g. they are also dispatched through the IDT. However, unlike exceptions, they don't arise directly on the CPU. Instead, an _interrupt controller_ aggregates these interrupts and forwards them to CPU depending on their priority. In the next post we will explore the [Intel 8259] \(“PIC”) interrupt controller and learn how to implement keyboard support.
-
-[Intel 8259]: https://en.wikipedia.org/wiki/Intel_8259
+The next post explains how ...
