@@ -612,7 +612,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 We reuse the `test_runner` and `test_panic_handler` functions from our `lib.rs`. Since we want to test allocations, we enable the `alloc` crate through the `extern crate alloc` statement. For more information about the test boilerplate check out the [_Testing_] post.
 
-[_Testing_]: @/edition-2/posts/04-testing/index.md
+[_Testing_]: @/edition-2/posts/04-organizing-testing/index.md
 
 The implementation of the `main` function looks like this:
 
