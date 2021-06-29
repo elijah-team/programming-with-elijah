@@ -2,7 +2,7 @@
 title = "Libraries and Executables"
 weight = 3
 path = "libraries-and-executables"
-date  = 2018-02-26
+date  = 2021-06-13
 
 [extra]
 chapter = "Organizing your Code"

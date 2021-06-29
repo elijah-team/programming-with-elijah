@@ -2,13 +2,13 @@
 title = "Testing"
 weight = 4
 path = "testing"
-date = 2019-04-27
+date = 2021-06-13
 
 [extra]
 chapter = "Organizing your Code"
 +++
 
-This post explores unit and integration testing in `no_std` executables. We will use Rust's support for custom test frameworks to execute test functions inside our kernel. To report the results out of QEMU, we will use different features of QEMU and the `bootimage` tool.
+This post explores testing.
 
 <!-- more -->
 
