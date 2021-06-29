@@ -43,7 +43,7 @@ The goal of this project is to provide step-by-step tutorials in individual blog
 
 - [Function Invocation](https://elijah-team.github.io/programming-with-elijah/function-invocation/)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-05))
-- [Double Faults](https://elijah-team.github.io/programming-with-elijah/double-fault-exceptions/)
+- [Double Faults](https://elijah-team.github.io/programming-with-elijah/overloading)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-06))
 - [Hardware Interrupts](https://elijah-team.github.io/programming-with-elijah/hardware-interrupts/)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-07))
