@@ -1,10 +1,12 @@
 # Blog Content
 
-This folder contains the content for the _"Writing an OS in Rust"_ blog.
+This folder contains the content for the _"Programming with Elijah"_ blog.
 
 ## License
 
-This folder is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License, available in [LICENSE-CC-BY-NC](LICENSE-CC-BY-NC) or under <https://creativecommons.org/licenses/by-nc/4.0/>.
+This folder is licensed under the GNU Free Documentation License, available in [LICENSE-GFDL](LICENSE-GFDL) or under <https://gnu.org/licenses/gfdl.html>.
+
+> The purpose of this License is to make a manual, textbook, or other functional and useful document "free" in the sense of freedom: to assure everyone the effective freedom to copy and redistribute it, with or without modifying it, either commercially or noncommercially. Secondarily, this License preserves for the author and publisher a way to get credit for their work, while not being considered responsible for modifications made by others.
 
 All _code examples_ between markdown code blocks denoted by three backticks (<code>\`\`\`</code>) are additionally licensed under either of
 
