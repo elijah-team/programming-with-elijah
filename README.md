@@ -43,16 +43,16 @@ The goal of this project is to provide step-by-step tutorials in individual blog
 
 - [Function Invocation](https://elijah-team.github.io/programming-with-elijah/function-invocation/)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-05))
-- [Double Faults](https://elijah-team.github.io/programming-with-elijah/overloading)
+- [Overloading](https://elijah-team.github.io/programming-with-elijah/overloading)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-06))
 - [Hardware Interrupts](https://elijah-team.github.io/programming-with-elijah/hardware-interrupts/)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-07))
 
 **The Memory Model:**
 
-- [Introduction to Paging](https://elijah-team.github.io/programming-with-elijah/paging-introduction/)
+- [Memory Classes](https://elijah-team.github.io/programming-with-elijah/memory-classes/)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-08))
-- [Paging Implementation](https://elijah-team.github.io/programming-with-elijah/paging-implementation/)
+- [Allocators](https://elijah-team.github.io/programming-with-elijah/allocators/)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-09))
 - [Heap Allocation](https://elijah-team.github.io/programming-with-elijah/heap-allocation/)
     ([source code](https://elijah-team.github.io/programming-with-elijah/tree/post-10))
