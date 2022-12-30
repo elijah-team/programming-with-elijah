@@ -2,12 +2,12 @@ on: push
 name: Build and deploy on push
 jobs:
   build:
-    name: tripleo1/zola-deploy-action
+    name: elijah-team/zola-deploy-action
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: tripleo1/zola-deploy-action
-      uses: tripleo1/zola-deploy-action@master
+    - name: elijah-team/zola-deploy-action
+      uses: elijah-team/zola-deploy-action@master
       env:
         PAGES_BRANCH: gh-pages
         BUILD_DIR: blog
