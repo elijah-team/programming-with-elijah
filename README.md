@@ -75,6 +75,6 @@ Unless you explicitly state otherwise, any contribution intentionally submitted 
 
 Thanks to:
 
-* `phil-opp` for Blog OS, which the was derived (cribbed) from.
-* `getzola` for the zola SSG
-* `shalzz` for the zola Github Action
+* `phil-opp` for Blog OS, which this was derived (cribbed) from.
+* `getzola` for the [Zola SSG](https://github.com/getzola/zola/)
+* `shalzz` for the [Zola Github Action](https://github.com/shallz/zola-deploy-action/)
