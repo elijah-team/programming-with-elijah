@@ -37,7 +37,7 @@
     <p>Receive notifications about new posts and other major changes! You can either:</p>
 
     <ul>
-        <li>Subscribe to our <a href="/rss.xml">RSS/Atom Feed</a>,</li>
+        <li>Subscribe to our <a href="/programming-with-elijah/rss.xml">RSS/Atom Feed</a>,</li>
     </ul>
 </div>
 
@@ -68,9 +68,9 @@
             {%- if lang_code != lang -%}
                 <li data-lang-switch-to="{{ lang_code }}" class="">
                     {%- if lang_code == "en" -%}
-                        <a href="/">English (original)</a>
+                        <a href="/programming-with-elijah/">English (original)</a>
                     {%- else -%}
-                        <a href="/{{ lang_code }}">{{ trans(key="lang_name", lang = lang_code) }}</a>
+                        <a href="/programming-with-elijah/{{ lang_code }}">{{ trans(key="lang_name", lang = lang_code) }}</a>
                     {%- endif -%}
                 </li>
             {%- endif %}
