@@ -33,8 +33,8 @@ jobs:
 
     - name: 'Search and Replace'
       run: |
-        true ./fart -r \*.html href=\"/ href=\"/programming-with-elijah/
-        true ./fart -r \*.html src=\"/ src=\"/programming-with-elijah/
+        ./fart -r \*.html href=\"/ href=\"/programming-with-elijah/
+        ./fart -r \*.html src=\"/ src=\"/programming-with-elijah/
 
     - run: |
         date > generated.txt
