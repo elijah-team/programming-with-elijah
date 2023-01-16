@@ -1,0 +1,228 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This post explains how to implement heap allocators from scratch. It presents and discusses different allocator designs, including bump allocation, li…">
+    <meta name="author" content="Tripleo">
+
+    
+        <link rel="canonical" href="https://elijah-team.github.io/programming-with-elijah/allocator-designs/" />
+    
+    <link href="/programming-with-elijah/css/edition-2/poole.css" rel="stylesheet">
+    <link href="/programming-with-elijah/css/edition-2/main.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS feed for tripleo1.github.io/blog" href="https://elijah-team.github.io/programming-with-elijah//blog/rss.xml" />
+
+    <script async src="/programming-with-elijah/js/edition-2/main.js"></script>
+
+    <title>Allocator Designs | Programming with Elijah</title>
+</head>
+
+<body>
+    <div class="container content">
+        <header class="masthead">
+            <div style="position:relative">
+                <h2 class="masthead-title">
+                    <a href="https://elijah-team.github.io/programming-with-elijah/" title="Home">Programming with Elijah</a>
+                </h2>
+                <p><small>Programming&nbsp;with&nbsp;Elijah</small></p>
+                
+    <aside id="all-posts-link"><a href="https://elijah-team.github.io/programming-with-elijah/" title="All Posts">« All Posts</a></aside>
+
+            </div>
+        </header>
+
+        <div>
+            
+<aside id="toc-aside" class="">
+        <h2>Table of Contents</h2>
+    <ol>
+        <li>
+            <a href="#introduction">Introduction</a>
+            <ol>
+                <li>
+                    <a href="#design-goals">Design Goals</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#bump-allocator">Bump Allocator</a>
+            <ol>
+                <li>
+                    <a href="#idea">Idea</a>
+                </li><li>
+                    <a href="#implementation">Implementation</a>
+                </li><li>
+                    <a href="#discussion">Discussion</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#summary">Summary</a>
+            
+        </li><li>
+            <a href="#what-s-next">What's next?</a>
+            
+        </li>
+        <li class="toc-comments-link"><a href="#comments">Comments</a></li>
+    </ol>
+</aside>
+
+            <main>
+    <div class="">
+    <h1>Allocator Designs</h1>
+    <time datetime="2020-01-20" class="post-date">
+        Jan 20, 2020
+        
+    </time>
+    </div>
+
+    
+
+    <div class="">
+    <p>This post explains how to implement heap allocators from scratch. It presents and discusses different allocator designs, including bump allocation, linked list allocation, and fixed-size block allocation. For each of the three designs, we will create a basic implementation that can be used for our kernel.</p>
+<span id="continue-reading"></span>
+<p>This blog is openly developed on <a href="https://github.com/elijah-team/programming-with-elijah/">GitHub</a>. If you have any problems or questions, please open an issue there. You can also leave comments <a href="https://elijah-team.github.io/programming-with-elijah/allocator-designs/#comments">at the bottom</a>. The complete source code for this post can be found in the <a href="https://elijah-team.github.io/programming-with-elijah/tree/post-11"><code>post-11</code></a> branch.</p>
+
+    <details id = "toc-inline">
+        <summary><b>Table of Contents</b></summary>
+        <ul>
+            <li>
+                <a href="#introduction">Introduction</a>
+                <ul>
+                    <li>
+                        <a href="#design-goals">Design Goals</a>
+                    </li>
+                </ul>
+            </li><li>
+                <a href="#bump-allocator">Bump Allocator</a>
+                <ul>
+                    <li>
+                        <a href="#idea">Idea</a>
+                    </li><li>
+                        <a href="#implementation">Implementation</a>
+                    </li><li>
+                        <a href="#discussion">Discussion</a>
+                    </li>
+                </ul>
+            </li><li>
+                <a href="#summary">Summary</a>
+                
+            </li><li>
+                <a href="#what-s-next">What's next?</a>
+                
+            </li>
+            <li class="toc-comments-link"><a href="#comments">Comments</a></li>
+        </ul>
+    </details>
+
+<h2 id="introduction"><a class="zola-anchor" href="#introduction" aria-label="Anchor link for: introduction">🔗</a>Introduction</h2>
+<h3 id="design-goals"><a class="zola-anchor" href="#design-goals" aria-label="Anchor link for: design-goals">🔗</a>Design Goals</h3>
+<h2 id="bump-allocator"><a class="zola-anchor" href="#bump-allocator" aria-label="Anchor link for: bump-allocator">🔗</a>Bump Allocator</h2>
+<h3 id="idea"><a class="zola-anchor" href="#idea" aria-label="Anchor link for: idea">🔗</a>Idea</h3>
+<h3 id="implementation"><a class="zola-anchor" href="#implementation" aria-label="Anchor link for: implementation">🔗</a>Implementation</h3>
+<h4 id="globalalloc-and-mutability"><a class="zola-anchor" href="#globalalloc-and-mutability" aria-label="Anchor link for: globalalloc-and-mutability">🔗</a><code>GlobalAlloc</code> and Mutability</h4>
+<h4 id="a-locked-wrapper-type"><a class="zola-anchor" href="#a-locked-wrapper-type" aria-label="Anchor link for: a-locked-wrapper-type">🔗</a>A <code>Locked</code> Wrapper Type</h4>
+<h4 id="implementation-for-locked-bumpallocator"><a class="zola-anchor" href="#implementation-for-locked-bumpallocator" aria-label="Anchor link for: implementation-for-locked-bumpallocator">🔗</a>Implementation for <code>Locked&lt;BumpAllocator&gt;</code></h4>
+<h4 id="address-alignment"><a class="zola-anchor" href="#address-alignment" aria-label="Anchor link for: address-alignment">🔗</a>Address Alignment</h4>
+<h3 id="discussion"><a class="zola-anchor" href="#discussion" aria-label="Anchor link for: discussion">🔗</a>Discussion</h3>
+<h4 id="the-drawback-of-a-bump-allocator"><a class="zola-anchor" href="#the-drawback-of-a-bump-allocator" aria-label="Anchor link for: the-drawback-of-a-bump-allocator">🔗</a>The Drawback of a Bump Allocator</h4>
+<h2 id="summary"><a class="zola-anchor" href="#summary" aria-label="Anchor link for: summary">🔗</a>Summary</h2>
+<h2 id="what-s-next"><a class="zola-anchor" href="#what-s-next" aria-label="Anchor link for: what-s-next">🔗</a>What's next?</h2>
+<p>With this post, we conclude our memory management implementation for now. Next, we will start exploring <a href="https://en.wikipedia.org/wiki/Computer_multitasking"><em>multitasking</em></a>, starting with <a href="https://en.wikipedia.org/wiki/Thread_(computing)"><em>threads</em></a>. In subsequent post we will then explore <a href="https://en.wikipedia.org/wiki/Multiprocessing"><em>multiprocessing</em></a>, <a href="https://en.wikipedia.org/wiki/Process_(computing)"><em>processes</em></a>, and cooperative multitasking in the form of <a href="https://rust-lang.github.io/async-book/01_getting_started/04_async_await_primer.html"><em>async/await</em></a>.</p>
+
+    </div>
+
+    <div class="post-footer-support">
+        <h2>Support Me</h2>
+        
+<p>
+    Creating and <a href="https:&#x2F;&#x2F;elijah-team.github.io&#x2F;programming-with-elijah&#x2F;status-update&#x2F;">maintaining</a> this blog and the associated libraries is a lot of work, but I really enjoy doing it. By supporting me, you allow me to invest more time in new content, new features, and continuous maintenance.
+</p>
+<p>
+    The best way to support me is to <a href="https://github.com/sponsors/phil-opp"><em>sponsor me on GitHub</em></a>, since they don't charge any fees. If you prefer other platforms, I also have <a href="https://www.patreon.com/phil_opp"><em>Patreon</em></a> and <a href="https://donorbox.org/phil-opp"><em>Donorbox</em></a> accounts. The latter is the most flexible as it supports multiple currencies and one-time contributions.
+</p>
+<p>
+    Thank you!
+</p>
+
+    </div>
+
+    <hr>
+    <div class="PageNavigation">
+        
+            <a class="prev" href="/heap-allocation/">&laquo; Heap Allocation</a>
+        
+        
+            <a class="next" href="/async-await/">Async&#x2F;Await &raquo;</a>
+        
+    </div>
+
+    <hr>
+    <section>
+        <h2 id="comments" class="">Comments</h2>
+
+        
+    <script src="https://utteranc.es/client.js"
+        data-repo="elijah-team/programming-with-elijah/"
+        data-issue-term="url"
+        data-label="comments"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+    </section>
+
+    <aside class="page-aside-right">
+        <div class="block" id="language-selector">
+            <h2>Other Languages</h2>
+            <ul>
+                <li data-lang-switch-to="en" class=""><a href="https://elijah-team.github.io/programming-with-elijah/allocator-designs/">English (original)</a></li>
+            </ul>
+        </div>
+
+        <div class="block">
+            <h2>About Me</h2>
+            <p>
+		I'm just a guy who likes languages, OSes, and the intersection of the two.
+            </p><p>
+                If you want to work with me, reach out on <a href="mailto:remove:oluoluolu+elijah-team-github@gmail.com">E-Mail</a>.
+            </p>
+        </div>
+    </aside>
+
+</main>
+        </div>
+
+        <div></div>
+
+        <footer class="footer">
+            <hr>
+            <small>
+                &copy; <time datetime="2021">2021</time>. All rights reserved.
+                <a href="https://elijah-team.github.io/programming-with-elijah/contact/">Contact</a>
+            </small>
+        </footer>
+    </div>
+
+    <!-- Fathom - simple website analytics - https://github.com/usefathom/fathom -->
+    <script>
+        (function(f, a, t, h, o, m){
+            a[h]=a[h]||function(){
+                (a[h].q=a[h].q||[]).push(arguments)
+            };
+            o=f.createElement('script'),
+            m=f.getElementsByTagName('script')[0];
+            o.async=1; o.src=t; o.id='fathom-script';
+            m.parentNode.insertBefore(o,m)
+        })(document, window, '/tracker.js', 'fathom');
+        fathom('set', 'siteId', 'MUXWM');
+        fathom('trackPageview');
+    </script>
+    <!-- / Fathom -->
+</body>
+
+</html>
+OC

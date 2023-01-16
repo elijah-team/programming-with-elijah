@@ -1,0 +1,229 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This post explores testing.
+">
+    <meta name="author" content="Tripleo">
+
+    
+        <link rel="canonical" href="https://elijah-team.github.io/programming-with-elijah/testing/" />
+    
+    <link href="/programming-with-elijah/css/edition-2/poole.css" rel="stylesheet">
+    <link href="/programming-with-elijah/css/edition-2/main.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS feed for tripleo1.github.io/blog" href="https://elijah-team.github.io/programming-with-elijah//blog/rss.xml" />
+
+    <script async src="/programming-with-elijah/js/edition-2/main.js"></script>
+
+    <title>Testing | Programming with Elijah</title>
+</head>
+
+<body>
+    <div class="container content">
+        <header class="masthead">
+            <div style="position:relative">
+                <h2 class="masthead-title">
+                    <a href="https://elijah-team.github.io/programming-with-elijah/" title="Home">Programming with Elijah</a>
+                </h2>
+                <p><small>Programming&nbsp;with&nbsp;Elijah</small></p>
+                
+    <aside id="all-posts-link"><a href="https://elijah-team.github.io/programming-with-elijah/" title="All Posts">« All Posts</a></aside>
+
+            </div>
+        </header>
+
+        <div>
+            
+<aside id="toc-aside" class="">
+        <h2>Table of Contents</h2>
+    <ol>
+        <li>
+            <a href="#requirements">Requirements</a>
+            
+        </li><li>
+            <a href="#testing-in-rust">Testing in Rust</a>
+            <ol>
+                <li>
+                    <a href="#custom-test-frameworks">Custom Test Frameworks</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#exiting-qemu">Exiting QEMU</a>
+            <ol>
+                <li>
+                    <a href="#i-o-ports">I/O Ports</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#summary">Summary</a>
+            
+        </li><li>
+            <a href="#what-s-next">What's next?</a>
+            
+        </li>
+        <li class="toc-comments-link"><a href="#comments">Comments</a></li>
+    </ol>
+</aside>
+
+            <main>
+    <div class="">
+    <h1>Testing</h1>
+    <time datetime="2021-06-13" class="post-date">
+        Jun 13, 2021
+        
+    </time>
+    </div>
+
+    
+
+    <div class="">
+    <p>This post explores testing.</p>
+<span id="continue-reading"></span>
+<p>This blog is openly developed on <a href="https://github.com/elijah-team/programming-with-elijah/">GitHub</a>. If you have any problems or questions, please open an issue there. You can also leave comments <a href="https://elijah-team.github.io/programming-with-elijah/testing/#comments">at the bottom</a>. The complete source code for this post can be found in the <a href="https://elijah-team.github.io/programming-with-elijah/tree/post-04"><code>post-04</code></a> branch.</p>
+
+    <details id = "toc-inline">
+        <summary><b>Table of Contents</b></summary>
+        <ul>
+            <li>
+                <a href="#requirements">Requirements</a>
+                
+            </li><li>
+                <a href="#testing-in-rust">Testing in Rust</a>
+                <ul>
+                    <li>
+                        <a href="#custom-test-frameworks">Custom Test Frameworks</a>
+                    </li>
+                </ul>
+            </li><li>
+                <a href="#exiting-qemu">Exiting QEMU</a>
+                <ul>
+                    <li>
+                        <a href="#i-o-ports">I/O Ports</a>
+                    </li>
+                </ul>
+            </li><li>
+                <a href="#summary">Summary</a>
+                
+            </li><li>
+                <a href="#what-s-next">What's next?</a>
+                
+            </li>
+            <li class="toc-comments-link"><a href="#comments">Comments</a></li>
+        </ul>
+    </details>
+
+<h2 id="requirements"><a class="zola-anchor" href="#requirements" aria-label="Anchor link for: requirements">🔗</a>Requirements</h2>
+<h2 id="testing-in-rust"><a class="zola-anchor" href="#testing-in-rust" aria-label="Anchor link for: testing-in-rust">🔗</a>Testing in Rust</h2>
+<p>Since the <code>test</code> crate depends on the standard library, it is not available for our bare metal target. While porting the <code>test</code> crate to a <code>#[no_std]</code> context <a href="https://github.com/japaric/utest">is possible</a>, it is highly unstable and requires some hacks such as redefining the <code>panic</code> macro.</p>
+<h3 id="custom-test-frameworks"><a class="zola-anchor" href="#custom-test-frameworks" aria-label="Anchor link for: custom-test-frameworks">🔗</a>Custom Test Frameworks</h3>
+<div class = "warning">
+<p><strong>Note:</strong> There is currently a bug in cargo that leads to &quot;duplicate lang item&quot; errors on <code>cargo test</code> in some cases. It occurs when you have set <code>panic = &quot;abort&quot;</code> for a profile in your <code>Cargo.toml</code>. Try removing it, then <code>cargo test</code> should work. See the <a href="https://github.com/rust-lang/cargo/issues/7359">cargo issue</a> for more information on this.</p>
+</div>
+<h2 id="exiting-qemu"><a class="zola-anchor" href="#exiting-qemu" aria-label="Anchor link for: exiting-qemu">🔗</a>Exiting QEMU</h2>
+<h3 id="i-o-ports"><a class="zola-anchor" href="#i-o-ports" aria-label="Anchor link for: i-o-ports">🔗</a>I/O Ports</h3>
+<h2 id="summary"><a class="zola-anchor" href="#summary" aria-label="Anchor link for: summary">🔗</a>Summary</h2>
+<p>Testing is a very useful technique to ensure that certain components have a desired behavior. Even if they cannot show the absence of bugs, they're still an useful tool for finding them and especially for avoiding regressions.</p>
+<p>This post explained how to set up a test framework for our Rust kernel. We used the custom test frameworks feature of Rust to implement support for a simple <code>#[test_case]</code> attribute in our bare-metal environment. By using the <code>isa-debug-exit</code> device of QEMU, our test runner can exit QEMU after running the tests and report the test status out. To print error messages to the console instead of the VGA buffer, we created a basic driver for the serial port.</p>
+<p>After creating some tests for our <code>println</code> macro, we explored integration tests in the second half of the post. We learned that they live in the <code>tests</code> directory and are treated as completely separate executables. To give them access to the <code>exit_qemu</code> function and the <code>serial_println</code> macro, we moved most of our code into a library that can be imported by all executables and integration tests. Since integration tests run in their own separate environment, they make it possible to test interactions with the hardware or to create tests that should panic.</p>
+<p>We now have a test framework that runs in a realistic environment inside QEMU. By creating more tests in future posts, we can keep our kernel maintainable when it becomes more complex.</p>
+<h2 id="what-s-next"><a class="zola-anchor" href="#what-s-next" aria-label="Anchor link for: what-s-next">🔗</a>What's next?</h2>
+<p>In the next post, we will explore <em>CPU exceptions</em>. These exceptions are thrown by the CPU when something illegal happens, such as a division by zero or an access to an unmapped memory page (a so-called “page fault”). Being able to catch and examine these exceptions is very important for debugging future errors. Exception handling is also very similar to the handling of hardware interrupts, which is required for keyboard support.</p>
+
+    </div>
+
+    <div class="post-footer-support">
+        <h2>Support Me</h2>
+        
+<p>
+    Creating and <a href="https:&#x2F;&#x2F;elijah-team.github.io&#x2F;programming-with-elijah&#x2F;status-update&#x2F;">maintaining</a> this blog and the associated libraries is a lot of work, but I really enjoy doing it. By supporting me, you allow me to invest more time in new content, new features, and continuous maintenance.
+</p>
+<p>
+    The best way to support me is to <a href="https://github.com/sponsors/phil-opp"><em>sponsor me on GitHub</em></a>, since they don't charge any fees. If you prefer other platforms, I also have <a href="https://www.patreon.com/phil_opp"><em>Patreon</em></a> and <a href="https://donorbox.org/phil-opp"><em>Donorbox</em></a> accounts. The latter is the most flexible as it supports multiple currencies and one-time contributions.
+</p>
+<p>
+    Thank you!
+</p>
+
+    </div>
+
+    <hr>
+    <div class="PageNavigation">
+        
+            <a class="prev" href="/libraries-and-executables/">&laquo; Libraries and Executables</a>
+        
+        
+            <a class="next" href="/function-invocation/">Function Invocation &raquo;</a>
+        
+    </div>
+
+    <hr>
+    <section>
+        <h2 id="comments" class="">Comments</h2>
+
+        
+    <script src="https://utteranc.es/client.js"
+        data-repo="elijah-team/programming-with-elijah/"
+        data-issue-term="url"
+        data-label="comments"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+    </section>
+
+    <aside class="page-aside-right">
+        <div class="block" id="language-selector">
+            <h2>Other Languages</h2>
+            <ul>
+                <li data-lang-switch-to="en" class=""><a href="https://elijah-team.github.io/programming-with-elijah/testing/">English (original)</a></li>
+            </ul>
+        </div>
+
+        <div class="block">
+            <h2>About Me</h2>
+            <p>
+		I'm just a guy who likes languages, OSes, and the intersection of the two.
+            </p><p>
+                If you want to work with me, reach out on <a href="mailto:remove:oluoluolu+elijah-team-github@gmail.com">E-Mail</a>.
+            </p>
+        </div>
+    </aside>
+
+</main>
+        </div>
+
+        <div></div>
+
+        <footer class="footer">
+            <hr>
+            <small>
+                &copy; <time datetime="2021">2021</time>. All rights reserved.
+                <a href="https://elijah-team.github.io/programming-with-elijah/contact/">Contact</a>
+            </small>
+        </footer>
+    </div>
+
+    <!-- Fathom - simple website analytics - https://github.com/usefathom/fathom -->
+    <script>
+        (function(f, a, t, h, o, m){
+            a[h]=a[h]||function(){
+                (a[h].q=a[h].q||[]).push(arguments)
+            };
+            o=f.createElement('script'),
+            m=f.getElementsByTagName('script')[0];
+            o.async=1; o.src=t; o.id='fathom-script';
+            m.parentNode.insertBefore(o,m)
+        })(document, window, '/tracker.js', 'fathom');
+        fathom('set', 'siteId', 'MUXWM');
+        fathom('trackPageview');
+    </script>
+    <!-- / Fathom -->
+</body>
+
+</html>
+OC

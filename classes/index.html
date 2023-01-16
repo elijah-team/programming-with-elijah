@@ -1,0 +1,309 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Classes are one of the fundamental building blocks of Elijah code.  This post will discuss the kinds of classes available in Elijah.
+">
+    <meta name="author" content="Tripleo">
+
+    
+        <link rel="canonical" href="https://elijah-team.github.io/programming-with-elijah/classes/" />
+    
+    <link href="/programming-with-elijah/css/edition-2/poole.css" rel="stylesheet">
+    <link href="/programming-with-elijah/css/edition-2/main.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS feed for tripleo1.github.io/blog" href="https://elijah-team.github.io/programming-with-elijah//blog/rss.xml" />
+
+    <script async src="/programming-with-elijah/js/edition-2/main.js"></script>
+
+    <title>Classes | Programming with Elijah</title>
+</head>
+
+<body>
+    <div class="container content">
+        <header class="masthead">
+            <div style="position:relative">
+                <h2 class="masthead-title">
+                    <a href="https://elijah-team.github.io/programming-with-elijah/" title="Home">Programming with Elijah</a>
+                </h2>
+                <p><small>Programming&nbsp;with&nbsp;Elijah</small></p>
+                
+    <aside id="all-posts-link"><a href="https://elijah-team.github.io/programming-with-elijah/" title="All Posts">« All Posts</a></aside>
+
+            </div>
+        </header>
+
+        <div>
+            
+<aside id="toc-aside" class="">
+        <h2>Table of Contents</h2>
+    <ol>
+        <li>
+            <a href="#overview">Overview</a>
+            
+        </li><li>
+            <a href="#normal-classes">Normal Classes</a>
+            
+        </li><li>
+            <a href="#interface-classes">Interface Classes</a>
+            
+        </li><li>
+            <a href="#signature-classes">Signature Classes</a>
+            
+        </li><li>
+            <a href="#abstract-classes">Abstract Classes</a>
+            
+        </li><li>
+            <a href="#enum-classes">Enum Classes</a>
+            
+        </li><li>
+            <a href="#datatypes">Datatypes</a>
+            
+        </li><li>
+            <a href="#annotation-classes">Annotation Classes</a>
+            
+        </li><li>
+            <a href="#exception-classes">Exception Classes</a>
+            
+        </li><li>
+            <a href="#summary">Summary</a>
+            
+        </li><li>
+            <a href="#what-s-next">What's next?</a>
+            
+        </li>
+        <li class="toc-comments-link"><a href="#comments">Comments</a></li>
+    </ol>
+</aside>
+
+            <main>
+    <div class="">
+    <h1>Classes</h1>
+    <time datetime="2021-06-13" class="post-date">
+        Jun 13, 2021
+        
+    </time>
+    </div>
+
+    
+
+    <div class="">
+    <p>Classes are one of the fundamental building blocks of Elijah code.  This post will discuss the kinds of classes available in Elijah.</p>
+<span id="continue-reading"></span>
+<p>This blog is openly developed on <a href="https://github.com/elijah-team/programming-with-elijah/">GitHub</a>. If you have any problems or questions, please open an issue there. You can also leave comments <a href="https://elijah-team.github.io/programming-with-elijah/classes/#comments">at the bottom</a>. The complete source code for this post can be found in the <a href="https://elijah-team.github.io/programming-with-elijah/tree/post-01"><code>post-01</code></a> branch.</p>
+
+    <details id = "toc-inline">
+        <summary><b>Table of Contents</b></summary>
+        <ul>
+            <li>
+                <a href="#overview">Overview</a>
+                
+            </li><li>
+                <a href="#normal-classes">Normal Classes</a>
+                
+            </li><li>
+                <a href="#interface-classes">Interface Classes</a>
+                
+            </li><li>
+                <a href="#signature-classes">Signature Classes</a>
+                
+            </li><li>
+                <a href="#abstract-classes">Abstract Classes</a>
+                
+            </li><li>
+                <a href="#enum-classes">Enum Classes</a>
+                
+            </li><li>
+                <a href="#datatypes">Datatypes</a>
+                
+            </li><li>
+                <a href="#annotation-classes">Annotation Classes</a>
+                
+            </li><li>
+                <a href="#exception-classes">Exception Classes</a>
+                
+            </li><li>
+                <a href="#summary">Summary</a>
+                
+            </li><li>
+                <a href="#what-s-next">What's next?</a>
+                
+            </li>
+            <li class="toc-comments-link"><a href="#comments">Comments</a></li>
+        </ul>
+    </details>
+
+<h2 id="overview"><a class="zola-anchor" href="#overview" aria-label="Anchor link for: overview">🔗</a>Overview</h2>
+<p>From the Python documentation:</p>
+<blockquote>
+<p>Classes provide a means of bundling data and functionality together. Creating a new class creates a new type of object, allowing new instances of that type to be made. Each class instance can have attributes attached to it for maintaining its state. Class instances can also have methods (defined by its class) for modifying its state.</p>
+</blockquote>
+<p>All classes support multiple inheritance.  Redefinition/renaming of conflicting features (variables, properties and functions) is a &quot;research topic&quot;.</p>
+<p>All classes support nesting and can refer to the contents of its container, where applicable (basically in normal classes).</p>
+<h2 id="normal-classes"><a class="zola-anchor" href="#normal-classes" aria-label="Anchor link for: normal-classes">🔗</a>Normal Classes</h2>
+<p>A normal class is just that -- normal.  It can be <em>generic</em>, but other than that it has no other special behavior in the system.  Classes are the &quot;containers&quot; and an organizational structure for variables and functions.  Special to classes are properties, which are basically functions that look like variables.</p>
+<p>To interact with a class, you have to create an <em>instance</em>, by <em>constructing</em> it. See <em>constructors</em>.</p>
+<p>Classes are also special because they also represent <em>types</em>.  All values (variables and expressions) in Elijah have a type, which frequently is not specified, but automatically found out by a process known as <em>type deduction</em>.  This is functinonally similar to <em>type inferencing</em>.</p>
+<h2 id="interface-classes"><a class="zola-anchor" href="#interface-classes" aria-label="Anchor link for: interface-classes">🔗</a>Interface Classes</h2>
+<p>An interface class declares a class that can't be instantiated.  The purpose of it is to specify a set of functions (and/or properties) which must be implemented by derived classes.  An interface can extend another interface by inheriting from it.  An interface can combine multiple interfaces into a single interface if thata is the programmer's wish.</p>
+<p>An interface can contain default behavior (as Java was recently extended to implement) for functions that can be inherited or overridden by derived classes.</p>
+<blockquote>
+<p>An interface can override its inherited default behaviors too.</p>
+</blockquote>
+<p>An interface can contain properties, which can be <code>abstract</code>.  They usually are because properties usually utilize the member variables of a class.
+An interface cannot contain variables or abstract methods.  An interface usually contains just function headers.</p>
+<h2 id="signature-classes"><a class="zola-anchor" href="#signature-classes" aria-label="Anchor link for: signature-classes">🔗</a>Signature Classes</h2>
+<p>A signature class can only contain function headers.  That means <em>contracts</em> are not supported, and neither is the default specification of behaviors.  It only exists at compile time and cannot be tested for (using <code>is_a</code>).  It's purpose is to specify a set of functions that must be implemeted by derived classes.  It is kind of like pattern matching for classes.</p>
+<blockquote>
+<p>Maybe we can relax the can't be tested for thing...</p>
+</blockquote>
+<h2 id="abstract-classes"><a class="zola-anchor" href="#abstract-classes" aria-label="Anchor link for: abstract-classes">🔗</a>Abstract Classes</h2>
+<p>Abstract classes extend the conception of interfaces by allowing the specification of functions with <em>contracts</em> but no implementation (meaning they are abstract) and allowing the inclusion of variables and non-abstract properties.</p>
+<p>An abstract class is meant to define default behavior for a set of derived classes.</p>
+<p>An abstract class cannot be instantiated.</p>
+<h2 id="enum-classes"><a class="zola-anchor" href="#enum-classes" aria-label="Anchor link for: enum-classes">🔗</a>Enum Classes</h2>
+<p>Enums exist to group the possible states of a variable.  Enums are very similar to <code>datatype</code>s and very similar to classes and can be looked at as the combination of the two.</p>
+<p><code>enum</code> classes in Elijah are the same as they are in Java.  Each variant can contain a number of attributes or none at all (but it is an all or  nothing choice, unlike <code>datatypes</code>).  Also each variant can contain implementations of abstract methods defined in the body of the enum itself, thus allowing the differentiation of variant states without defining functions in a separate namespace.</p>
+<p>Enums can contain only one constructor and only one named constructor called copy, which would take a single value of the same enum type.</p>
+<h2 id="datatypes"><a class="zola-anchor" href="#datatypes" aria-label="Anchor link for: datatypes">🔗</a>Datatypes</h2>
+<p>A datatype is an enumeration of known states.  In fact, in Rust, it is called an <code>enum</code>.</p>
+<p>Datatypes have a special syntax:</p>
+<pre style="background-color:#1e1e1e;">
+<code><span style="color:#dcdcdc;">datatype Boolean = 
+  True
+  | False
+</span></code></pre>
+<p>That is, they do not allow the definition of functions alongside of the rest of the declaration.  Functions which take a <code>datatype</code> as <code>self</code> are rare because they are usually used in pattern matching in <code>match</code> clauses.  But it is customary to declare those functions that do in a parallel namespace with an underscore affixed.</p>
+<p>Datatypes allow data to be attached to instances.  Instances are only created when there is data to be attached.  <code>True</code> and <code>False</code> above are singletons, and may be represented as integers by the compiler.</p>
+<pre style="background-color:#1e1e1e;">
+<code><span style="color:#dcdcdc;">datatype Maybe[T] = 
+  Some(t: T)
+  | Nothing
+</span></code></pre>
+<blockquote>
+<p>Note this type is <em>generic</em></p>
+</blockquote>
+<p>Datatypes are immutable, that is, once created, their values cannot be changed.</p>
+<p>This says either you have <code>Some</code> value <code>t</code> of generic type <code>T</code>, or you have <code>Nothing</code>.  Note that <code>t</code> cannot be assigned to -- it's value can never be changed.</p>
+<p>Datatypes can also have &quot;universal&quot; attributes -- these values are present in all variants of the datatype.</p>
+<pre style="background-color:#1e1e1e;">
+<code><span style="color:#dcdcdc;">datatype Message(id: Integer32) {
+  Quit
+  | Move ( x: i32, y: i32 )
+  | Write(String)
+  | ChangeColor(i32, i32, i32)
+}
+</span></code></pre>
+<p>Note that all variants have and <code>id</code> attribute, and each variant has a different number of individual attrbutes.</p>
+<h2 id="annotation-classes"><a class="zola-anchor" href="#annotation-classes" aria-label="Anchor link for: annotation-classes">🔗</a>Annotation Classes</h2>
+<p>Annotations are declared by inheriting from <code>tripleo.lang.Annotation</code>. I don't want to use a keyword for this right now.
+I don't know what effect annotations will have on the code produced by the Elijah compiler.</p>
+<h2 id="exception-classes"><a class="zola-anchor" href="#exception-classes" aria-label="Anchor link for: exception-classes">🔗</a>Exception Classes</h2>
+<p>Exceptions are declared by inheriting from <code>tripleo.lang.Exception</code>. I don't want to use a keyword for this right now.
+For Java interopability, you can use the annotation <code>ExceptionType(Error | Throwable)</code></p>
+<pre style="background-color:#1e1e1e;">
+<code><span style="color:#dcdcdc;">rustup target add thumbv7em-none-eabihf
+</span></code></pre>
+<p>This downloads a copy of the standard (and core) library for the system. Now we can build our freestanding executable for this target:</p>
+<pre style="background-color:#1e1e1e;">
+<code><span style="color:#dcdcdc;">cargo build --target thumbv7em-none-eabihf
+</span></code></pre><h2 id="summary"><a class="zola-anchor" href="#summary" aria-label="Anchor link for: summary">🔗</a>Summary</h2>
+<p>There are a number of different types of classes in Elijah, and some of them overlap, but they are for different programming styles or tastes.  Each has its benefits and each has its purpose.  To effectively program in Elijah it is necessary to master each one.</p>
+<h2 id="what-s-next"><a class="zola-anchor" href="#what-s-next" aria-label="Anchor link for: what-s-next">🔗</a>What's next?</h2>
+<p>The <a href="https://elijah-team.github.io/programming-with-elijah/namespaces-and-packages/">next post</a> how to organize classes to make them part of a cohesive whole.</p>
+
+    </div>
+
+    <div class="post-footer-support">
+        <h2>Support Me</h2>
+        
+<p>
+    Creating and <a href="https:&#x2F;&#x2F;elijah-team.github.io&#x2F;programming-with-elijah&#x2F;status-update&#x2F;">maintaining</a> this blog and the associated libraries is a lot of work, but I really enjoy doing it. By supporting me, you allow me to invest more time in new content, new features, and continuous maintenance.
+</p>
+<p>
+    The best way to support me is to <a href="https://github.com/sponsors/phil-opp"><em>sponsor me on GitHub</em></a>, since they don't charge any fees. If you prefer other platforms, I also have <a href="https://www.patreon.com/phil_opp"><em>Patreon</em></a> and <a href="https://donorbox.org/phil-opp"><em>Donorbox</em></a> accounts. The latter is the most flexible as it supports multiple currencies and one-time contributions.
+</p>
+<p>
+    Thank you!
+</p>
+
+    </div>
+
+    <hr>
+    <div class="PageNavigation">
+        
+        
+            <a class="next" href="/namespaces-and-packages/">Namespaces and Packages &raquo;</a>
+        
+    </div>
+
+    <hr>
+    <section>
+        <h2 id="comments" class="">Comments</h2>
+
+        
+    <script src="https://utteranc.es/client.js"
+        data-repo="elijah-team/programming-with-elijah/"
+        data-issue-term="url"
+        data-label="comments"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+    </section>
+
+    <aside class="page-aside-right">
+        <div class="block" id="language-selector">
+            <h2>Other Languages</h2>
+            <ul>
+                <li data-lang-switch-to="en" class=""><a href="https://elijah-team.github.io/programming-with-elijah/classes/">English (original)</a></li>
+            </ul>
+        </div>
+
+        <div class="block">
+            <h2>About Me</h2>
+            <p>
+		I'm just a guy who likes languages, OSes, and the intersection of the two.
+            </p><p>
+                If you want to work with me, reach out on <a href="mailto:remove:oluoluolu+elijah-team-github@gmail.com">E-Mail</a>.
+            </p>
+        </div>
+    </aside>
+
+</main>
+        </div>
+
+        <div></div>
+
+        <footer class="footer">
+            <hr>
+            <small>
+                &copy; <time datetime="2021">2021</time>. All rights reserved.
+                <a href="https://elijah-team.github.io/programming-with-elijah/contact/">Contact</a>
+            </small>
+        </footer>
+    </div>
+
+    <!-- Fathom - simple website analytics - https://github.com/usefathom/fathom -->
+    <script>
+        (function(f, a, t, h, o, m){
+            a[h]=a[h]||function(){
+                (a[h].q=a[h].q||[]).push(arguments)
+            };
+            o=f.createElement('script'),
+            m=f.getElementsByTagName('script')[0];
+            o.async=1; o.src=t; o.id='fathom-script';
+            m.parentNode.insertBefore(o,m)
+        })(document, window, '/tracker.js', 'fathom');
+        fathom('set', 'siteId', 'MUXWM');
+        fathom('trackPageview');
+    </script>
+    <!-- / Fathom -->
+</body>
+
+</html>
+OC

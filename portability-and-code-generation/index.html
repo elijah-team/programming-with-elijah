@@ -1,0 +1,185 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="In this post we explore cooperative multitasking and the async&#x2F;await feature of Rust. We take a detailed look how async&#x2F;await works in Rust, including…">
+    <meta name="author" content="Tripleo">
+
+    
+        <link rel="canonical" href="https://elijah-team.github.io/programming-with-elijah/portability-and-code-generation/" />
+    
+    <link href="/programming-with-elijah/css/edition-2/poole.css" rel="stylesheet">
+    <link href="/programming-with-elijah/css/edition-2/main.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS feed for tripleo1.github.io/blog" href="https://elijah-team.github.io/programming-with-elijah//blog/rss.xml" />
+
+    <script async src="/programming-with-elijah/js/edition-2/main.js"></script>
+
+    <title>Portability and Code Generation | Programming with Elijah</title>
+</head>
+
+<body>
+    <div class="container content">
+        <header class="masthead">
+            <div style="position:relative">
+                <h2 class="masthead-title">
+                    <a href="https://elijah-team.github.io/programming-with-elijah/" title="Home">Programming with Elijah</a>
+                </h2>
+                <p><small>Programming&nbsp;with&nbsp;Elijah</small></p>
+                
+    <aside id="all-posts-link"><a href="https://elijah-team.github.io/programming-with-elijah/" title="All Posts">« All Posts</a></aside>
+
+            </div>
+        </header>
+
+        <div>
+            
+<aside id="toc-aside" class="">
+        <h2>Table of Contents</h2>
+    <ol>
+        <li>
+            <a href="#summary">Summary</a>
+            
+        </li><li>
+            <a href="#what-s-next">What's Next?</a>
+            
+        </li>
+        <li class="toc-comments-link"><a href="#comments">Comments</a></li>
+    </ol>
+</aside>
+
+            <main>
+    <div class="">
+    <h1>Portability and Code Generation</h1>
+    <time datetime="2020-03-27" class="post-date">
+        Mar 27, 2020
+        
+    </time>
+    </div>
+
+    
+
+    <div class="">
+    <p>In this post we explore <em>cooperative multitasking</em> and the <em>async/await</em> feature of Rust. We take a detailed look how async/await works in Rust, including the design of the <code>Future</code> trait, the state machine transformation, and <em>pinning</em>. We then add basic support for async/await to our kernel by creating an asynchronous keyboard task and a basic executor.</p>
+<span id="continue-reading"></span>
+<p>This blog is openly developed on <a href="https://github.com/elijah-team/programming-with-elijah/">GitHub</a>. If you have any problems or questions, please open an issue there. You can also leave comments <a href="https://elijah-team.github.io/programming-with-elijah/portability-and-code-generation/#comments">at the bottom</a>. The complete source code for this post can be found in the <a href="https://elijah-team.github.io/programming-with-elijah/tree/post-12"><code>post-12</code></a> branch.</p>
+
+    <details id = "toc-inline">
+        <summary><b>Table of Contents</b></summary>
+        <ul>
+            <li>
+                <a href="#summary">Summary</a>
+                
+            </li><li>
+                <a href="#what-s-next">What's Next?</a>
+                
+            </li>
+            <li class="toc-comments-link"><a href="#comments">Comments</a></li>
+        </ul>
+    </details>
+
+<h2 id="summary"><a class="zola-anchor" href="#summary" aria-label="Anchor link for: summary">🔗</a>Summary</h2>
+<p>We started this post by introducing <strong>multitasking</strong> and differentiating between <em>preemptive</em> multitasking, which forcibly interrupts running tasks regularly, and <em>cooperative</em> multitasking, which lets tasks run until they voluntarily give up control of the CPU.</p>
+<p>We then explored how Rust's support of <strong>async/await</strong> provides a language-level implementation of cooperative multitasking. Rust bases its implementation on top of the polling-based <code>Future</code> trait, which abstracts asynchronous tasks. Using async/await, it is possible to work with futures almost like with normal synchronous code. The difference is that asynchronous functions return a <code>Future</code> again, which needs to be added to an executor at some point in order to run it.</p>
+<p>Behind the scenes, the compiler transforms async/await code to <em>state machines</em>, with each <code>.await</code> operation corresponding to a possible pause point. By utilizing its knowledge about the program, the compiler is able to save only the minimal state for each pause point, resulting in a very small memory consumption per task. One challenge is that the generated state machines might contain <em>self-referential</em> structs, for example when local variables of the asynchronous function reference each other. To prevent pointer invalidation, Rust uses the <code>Pin</code> type to ensure that futures cannot be moved in memory anymore after they have been polled for the first time.</p>
+<p>For our <strong>implementation</strong>, we first created a very basic executor that polls all spawned tasks in a busy loop without using the <code>Waker</code> type at all. We then showed the advantage of waker notifications by implementing an asynchronous keyboard task. The task defines a static <code>SCANCODE_QUEUE</code> using the mutex-free <code>ArrayQueue</code> type provided by the <code>crossbeam</code> crate. Instead of handling keypresses directly, the keyboard interrupt handler now puts all received scancodes in the queue and then wakes the registered <code>Waker</code> to signal that new input is available. On the receiving end, we created a <code>ScancodeStream</code> type to provide a <code>Future</code> resolving to the next scancode in the queue. This made it possible to create an asynchronous <code>print_keypresses</code> task that uses async/await to interpret and print the scancodes in the queue.</p>
+<p>To utilize the waker notifications of the keyboard task, we created a new <code>Executor</code> type that uses an <code>Arc</code>-shared <code>task_queue</code> for ready tasks. We implemented a <code>TaskWaker</code> type that pushes the ID of woken tasks directly to this <code>task_queue</code>, which are then polled again by the executor. To save power when no tasks are runnable, we added support for putting the CPU to sleep using the <code>hlt</code> instruction. Finally, we discussed some potential extensions of our executor, for example for providing multi-core support.</p>
+<h2 id="what-s-next"><a class="zola-anchor" href="#what-s-next" aria-label="Anchor link for: what-s-next">🔗</a>What's Next?</h2>
+<p>Using async/wait, we now have basic support for cooperative multitasking in our kernel. While cooperative multitasking is very efficient, it leads to latency problems when individual tasks keep running for too long and thus prevent other tasks to run. For this reason, it makes sense to also add support for preemptive multitasking to our kernel.</p>
+<p>In the next post, we will introduce <em>threads</em> as the most common form of preemptive multitasking. In addition to resolving the problem of long running tasks, threads will also prepare us for utilizing multiple CPU cores and running untrusted user programs in the future.</p>
+
+    </div>
+
+    <div class="post-footer-support">
+        <h2>Support Me</h2>
+        
+<p>
+    Creating and <a href="https:&#x2F;&#x2F;elijah-team.github.io&#x2F;programming-with-elijah&#x2F;status-update&#x2F;">maintaining</a> this blog and the associated libraries is a lot of work, but I really enjoy doing it. By supporting me, you allow me to invest more time in new content, new features, and continuous maintenance.
+</p>
+<p>
+    The best way to support me is to <a href="https://github.com/sponsors/phil-opp"><em>sponsor me on GitHub</em></a>, since they don't charge any fees. If you prefer other platforms, I also have <a href="https://www.patreon.com/phil_opp"><em>Patreon</em></a> and <a href="https://donorbox.org/phil-opp"><em>Donorbox</em></a> accounts. The latter is the most flexible as it supports multiple currencies and one-time contributions.
+</p>
+<p>
+    Thank you!
+</p>
+
+    </div>
+
+    <hr>
+    <div class="PageNavigation">
+        
+            <a class="prev" href="/async-await/">&laquo; Async&#x2F;Await</a>
+        
+        
+    </div>
+
+    <hr>
+    <section>
+        <h2 id="comments" class="">Comments</h2>
+
+        
+    <script src="https://utteranc.es/client.js"
+        data-repo="elijah-team/programming-with-elijah/"
+        data-issue-term="url"
+        data-label="comments"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+    </section>
+
+    <aside class="page-aside-right">
+        <div class="block" id="language-selector">
+            <h2>Other Languages</h2>
+            <ul>
+                <li data-lang-switch-to="en" class=""><a href="https://elijah-team.github.io/programming-with-elijah/portability-and-code-generation/">English (original)</a></li>
+            </ul>
+        </div>
+
+        <div class="block">
+            <h2>About Me</h2>
+            <p>
+		I'm just a guy who likes languages, OSes, and the intersection of the two.
+            </p><p>
+                If you want to work with me, reach out on <a href="mailto:remove:oluoluolu+elijah-team-github@gmail.com">E-Mail</a>.
+            </p>
+        </div>
+    </aside>
+
+</main>
+        </div>
+
+        <div></div>
+
+        <footer class="footer">
+            <hr>
+            <small>
+                &copy; <time datetime="2021">2021</time>. All rights reserved.
+                <a href="https://elijah-team.github.io/programming-with-elijah/contact/">Contact</a>
+            </small>
+        </footer>
+    </div>
+
+    <!-- Fathom - simple website analytics - https://github.com/usefathom/fathom -->
+    <script>
+        (function(f, a, t, h, o, m){
+            a[h]=a[h]||function(){
+                (a[h].q=a[h].q||[]).push(arguments)
+            };
+            o=f.createElement('script'),
+            m=f.getElementsByTagName('script')[0];
+            o.async=1; o.src=t; o.id='fathom-script';
+            m.parentNode.insertBefore(o,m)
+        })(document, window, '/tracker.js', 'fathom');
+        fathom('set', 'siteId', 'MUXWM');
+        fathom('trackPageview');
+    </script>
+    <!-- / Fathom -->
+</body>
+
+</html>
+OC
